@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>任书悦 | 个人主页</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #F8FAFC;
+            --surface-color: #FFFFFF;
+            --text-primary: #0F172A;
+            --text-secondary: #475569;
+            --accent-color: #3B82F6;
+            --border-light: rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.04);
+            --transition: all 0.3s ease;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', "Microsoft YaHei", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .page-wrapper {
+            max-width: 1300px; margin: 0 auto; padding: 40px; display: flex; gap: 50px;
+        }
+
+        /* 侧边栏 */
+        .sidebar {
+            flex: 0 0 300px; background: var(--surface-color); border-radius: 24px; padding: 40px 25px;
+            box-shadow: var(--shadow-md); border: 1px solid var(--border-light);
+            position: sticky; top: 40px; height: fit-content;
+        }
+        .profile-img {
+            width: 150px; height: 150px; border-radius: 50%; object-fit: cover; 
+            margin: 0 auto 20px; display: block; border: 4px solid #eff6ff;
+        }
+        .sidebar-header { text-align: center; margin-bottom: 25px; }
+        .sidebar-header h1 { font-size: 1.6rem; color: var(--text-primary); margin-bottom: 5px; }
+        .contact-list { list-style: none; border-top: 1px solid var(--border-light); padding-top: 20px; }
+        .contact-list li { display: flex; align-items: center; margin-bottom: 12px; font-size: 0.9rem; }
+        .contact-list i { width: 25px; color: var(--accent-color); }
+
+        /* 主内容区 */
+        .main-content { flex: 1; min-width: 0; }
+        section { margin-bottom: 50px; }
+        h2 { font-size: 1.6rem; color: var(--text-primary); margin-bottom: 25px; display: flex; align-items: center; }
+        h2::after { content: ''; flex: 1; height: 1px; background: #e2e8f0; margin-left: 20px; }
+
+        /* 个人能力模块 */
+        .skills-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
+        }
+        .skill-item {
+            background: var(--surface-color); padding: 20px; border-radius: 16px; border: 1px solid var(--border-light);
+        }
+        .skill-item h3 { font-size: 1.05rem; color: var(--text-primary); margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+        .skill-item i { color: var(--accent-color); }
+        .skill-item p { font-size: 0.9rem; line-height: 1.6; }
+
+        /* 横向滑动项目卡片 */
+        .project-scroll-container {
+            display: flex; gap: 25px; overflow-x: auto; padding: 10px 5px 25px 5px;
+            scrollbar-width: thin; scrollbar-color: var(--accent-color) transparent;
+        }
+        .project-scroll-container::-webkit-scrollbar { height: 6px; }
+        .project-scroll-container::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        
+        .project-card {
+            flex: 0 0 500px; /* 每张卡片固定宽度 */
+            background: var(--surface-color); border-radius: 20px; padding: 30px;
+            box-shadow: var(--shadow-md); border: 1px solid var(--border-light);
+            transition: var(--transition);
+        }
+        .project-card:hover { transform: translateY(-5px); border-color: var(--accent-color); }
+        
+        .project-tag { display: inline-block; padding: 4px 12px; background: #eff6ff; color: var(--accent-color); border-radius: 20px; font-size: 0.8rem; font-weight: 600; margin-bottom: 15px; }
+        .project-card h3 { font-size: 1.25rem; margin-bottom: 15px; color: var(--text-primary); }
+        .project-card ul { padding-left: 18px; margin-bottom: 20px; }
+        .project-card li { font-size: 0.9rem; margin-bottom: 8px; }
+        
+        /* 卡片内图片展示 */
+        .project-gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .project-gallery img { width: 100%; height: 120px; object-fit: cover; border-radius: 10px; border: 1px solid #f1f5f9; }
+
+        /* 响应式调整 */
+        @media (max-width: 1024px) {
+            .page-wrapper { flex-direction: column; }
+            .sidebar { position: relative; top: 0; width: 100%; }
+            .project-card { flex: 0 0 85%; } /* 平板/手机上显示更宽一些 */
+            .skills-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-wrapper">
+    <aside class="sidebar">
+        <img src="./figures/ProfilePicture.png" alt="任书悦" class="profile-img">
+        <div class="sidebar-header">
+            <h1>任书悦</h1>
+            <div style="font-size: 0.9rem;">TK短视频编导 / 跨平台运营</div>
+            <div style="color: var(--text-tertiary); font-size: 0.8rem; margin-top: 5px;">26岁 · 男 · 安徽六安</div>
+        </div>
+        <ul class="contact-list">
+            <li><i class="fas fa-phone"></i> 18576715670</li>
+            <li><i class="fas fa-envelope"></i> renshuyue010103@outlook.com</li>
+            <li><i class="fas fa-graduation-cap"></i> 南师大泰州学院 (法学)</li>
+            <li><i class="fas fa-language"></i> 英语六级 (CET-6)</li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        
+        <section>
+            <h2>关于我</h2>
+            <p style="font-size: 1.05rem;">
+                拥有近2年（2025.1-2026.5）TIKTOK短视频全链路运营经验，精通爆款复刻原理。具备平台流量逻辑与带货转化的跨平台实操能力，可快速适配不同平台特性落地高效运营策略。
+            </p>
+        </section>
+
+        <section>
+            <h2>个人能力</h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <h3><i class="fas fa-search-dollar"></i> 市场调研</h3>
+                    <p>快速捕捉内容流量趋势，定制化迎合市场用户需求，输出符合达人带货风格的高质量脚本。</p>
+                </div>
+                <div class="skill-item">
+                    <h3><i class="fas fa-chart-line"></i> 视频运营</h3>
+                    <p>精通TikTok平台规则、算法及运营策略，擅长制定高转化的内容规划与用户增长方案。</p>
+                </div>
+                <div class="skill-item">
+                    <h3><i class="fas fa-video"></i> 拍摄剪辑</h3>
+                    <p>熟练运用拍摄设备和剪辑软件，能够独立完成剪辑、特效制作与后期合成。</p>
+                </div>
+                <div class="skill-item">
+                    <h3><i class="fas fa-database"></i> 数据分析</h3>
+                    <p>利用第三方工具深度解构账号表现，为内容优化与投流策略提供精准数据支撑。</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>主导项目 (横向滑动查看)</h2>
+            <div class="project-scroll-container">
+                
+                <div class="project-card">
+                    <span class="project-tag">品牌引流</span>
+                    <h3>蝴蝶刀站外引流及运营</h3>
+                    <ul>
+                        <li>从0到1搭建品牌内容体系，覆盖新手、进阶及泛兴趣人群。</li>
+                        <li><strong>业绩：</strong> 创作100W+视频2条；GMV累计达$5W+。</li>
+                    </ul>
+                    <div class="project-gallery">
+                        <img src="./figures/蝴蝶刀bladeskingdom出单截图.png" alt="数据截图">
+                        <img src="./figures/蝴蝶刀账号数据.png" alt="数据截图">
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <span class="project-tag">宠物赛道</span>
+                    <h3>宠物清洁毛刷、手套项目</h3>
+                    <ul>
+                        <li>聚焦养宠痛点，通过AB测试沉淀爆款素材资产库。</li>
+                        <li><strong>业绩：</strong> 月均GMV $1W+；达人复刻产出$1.3w美金。</li>
+                    </ul>
+                    <div class="project-gallery">
+                        <img src="./figures/宠物—出单截图1.png" alt="数据截图">
+                        <img src="./figures/宠物达人视频数据1.png" alt="数据截图">
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <span class="project-tag">达人代运营</span>
+                    <h3>大马士革口袋刀项目</h3>
+                    <ul>
+                        <li>维护刀具垂类达人库，负责内容创意沟通及脚本审定。</li>
+                        <li><strong>业绩：</strong> 批量复刻爆款，累计产出3000多单。</li>
+                    </ul>
+                    <div class="project-gallery">
+                        <img src="./figures/大马士革刀达人视频数据2.png" alt="数据截图">
+                        <img src="./figures/大马士革刀视频数据1.png" alt="数据截图">
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section>
+            <h2>工作与教育</h2>
+            <div style="background: white; padding: 25px; border-radius: 20px; border: 1px solid var(--border-light);">
+                <div style="margin-bottom: 20px;">
+                    <strong style="color: var(--text-primary);">2025.11 - 2026.05</strong> | 益维顺跨境有限公司 · TK编导
+                </div>
+                <div>
+                    <strong style="color: var(--text-primary);">2019.07 - 2023.07</strong> | 南京师范大学泰州学院 · 本科法学
+                </div>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+</body>
+</html>
