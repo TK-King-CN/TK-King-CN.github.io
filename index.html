@@ -16,8 +16,10 @@
             --surface-color: #FFFFFF;
             --text-primary: #0F172A;
             --text-secondary: #475569;
+            --text-tertiary: #94A3B8;
             --accent-color: #3B82F6;
             --border-light: rgba(0, 0, 0, 0.08);
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
             --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.04);
             --transition: all 0.3s ease;
         }
@@ -62,42 +64,70 @@
         }
         .skill-item {
             background: var(--surface-color); padding: 20px; border-radius: 16px; border: 1px solid var(--border-light);
+            transition: var(--transition);
         }
+        .skill-item:hover { box-shadow: var(--shadow-sm); transform: translateY(-2px); border-color: #cbd5e1; }
         .skill-item h3 { font-size: 1.05rem; color: var(--text-primary); margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
         .skill-item i { color: var(--accent-color); }
         .skill-item p { font-size: 0.9rem; line-height: 1.6; }
 
-        /* 横向滑动项目卡片 */
-        .project-scroll-container {
-            display: flex; gap: 25px; overflow-x: auto; padding: 10px 5px 25px 5px;
-            scrollbar-width: thin; scrollbar-color: var(--accent-color) transparent;
+        /* 项目模块 (纵向排列) */
+        .projects-wrapper {
+            display: flex; flex-direction: column; gap: 35px;
         }
-        .project-scroll-container::-webkit-scrollbar { height: 6px; }
-        .project-scroll-container::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
         
         .project-card {
-            flex: 0 0 500px; /* 每张卡片固定宽度 */
             background: var(--surface-color); border-radius: 20px; padding: 30px;
             box-shadow: var(--shadow-md); border: 1px solid var(--border-light);
             transition: var(--transition);
         }
-        .project-card:hover { transform: translateY(-5px); border-color: var(--accent-color); }
+        .project-card:hover { transform: translateY(-3px); border-color: var(--accent-color); box-shadow: 0 15px 25px -5px rgba(0,0,0,0.05); }
         
-        .project-tag { display: inline-block; padding: 4px 12px; background: #eff6ff; color: var(--accent-color); border-radius: 20px; font-size: 0.8rem; font-weight: 600; margin-bottom: 15px; }
-        .project-card h3 { font-size: 1.25rem; margin-bottom: 15px; color: var(--text-primary); }
+        .project-tag { display: inline-block; padding: 4px 14px; background: #eff6ff; color: var(--accent-color); border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 15px; }
+        .project-card h3 { font-size: 1.3rem; margin-bottom: 15px; color: var(--text-primary); }
         .project-card ul { padding-left: 18px; margin-bottom: 20px; }
-        .project-card li { font-size: 0.9rem; margin-bottom: 8px; }
+        .project-card li { font-size: 0.95rem; margin-bottom: 8px; }
         
-        /* 卡片内图片展示 */
-        .project-gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-        .project-gallery img { width: 100%; height: 120px; object-fit: cover; border-radius: 10px; border: 1px solid #f1f5f9; }
+        /* 项目内部图片展示区 (横向滑动) */
+        .project-gallery { 
+            display: flex; gap: 15px; overflow-x: auto; padding-bottom: 15px;
+            scrollbar-width: thin; scrollbar-color: var(--accent-color) #f1f5f9;
+        }
+        .project-gallery::-webkit-scrollbar { height: 8px; }
+        .project-gallery::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 10px; }
+        .project-gallery::-webkit-scrollbar-thumb { background: #94A3B8; border-radius: 10px; }
+        .project-gallery::-webkit-scrollbar-thumb:hover { background: var(--accent-color); }
+        
+        .project-gallery img { 
+            height: 180px; /* 固定高度，宽度自适应 */
+            width: auto; 
+            min-width: 120px; /* 防止图片被压缩得太窄 */
+            object-fit: cover; 
+            border-radius: 12px; 
+            border: 1px solid var(--border-light);
+            flex-shrink: 0; /* 保证图片在容器内不会被挤压变形 */
+            transition: var(--transition);
+        }
+        .project-gallery img:hover { filter: brightness(0.95); cursor: pointer; }
+
+        /* 工作和教育经历卡片美化 */
+        .timeline-card {
+            background: var(--surface-color); padding: 25px; border-radius: 16px; 
+            border: 1px solid var(--border-light); border-left: 5px solid var(--accent-color); 
+            margin-bottom: 20px; box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+        .timeline-card:hover { box-shadow: var(--shadow-md); transform: translateX(5px); }
+        .timeline-date { font-size: 0.9rem; color: var(--accent-color); font-weight: 700; margin-bottom: 6px; }
+        .timeline-title { font-size: 1.15rem; color: var(--text-primary); font-weight: 700; margin-bottom: 4px; }
+        .timeline-subtitle { font-size: 0.95rem; color: var(--text-secondary); }
 
         /* 响应式调整 */
         @media (max-width: 1024px) {
             .page-wrapper { flex-direction: column; }
             .sidebar { position: relative; top: 0; width: 100%; }
-            .project-card { flex: 0 0 85%; } /* 平板/手机上显示更宽一些 */
             .skills-grid { grid-template-columns: 1fr; }
+            .project-gallery img { height: 150px; }
         }
     </style>
 </head>
@@ -105,16 +135,16 @@
 
 <div class="page-wrapper">
     <aside class="sidebar">
-        <img src="./figures/profile.jpg" alt="王灿" class="profile-img">
+        <img src="./figures/ProfilePicture.png" alt="王灿" class="profile-img">
         <div class="sidebar-header">
             <h1>王灿</h1>
-            <div style="font-size: 0.9rem;">TK短视频编导 / 跨平台运营</div>
-            <div style="color: var(--text-tertiary); font-size: 0.8rem; margin-top: 5px;">26岁 · 男 · 安徽六安</div>
+            <div style="font-size: 0.95rem; color: var(--text-secondary); font-weight: 600;">TK短视频编导 / 跨平台运营</div>
+            <div style="color: var(--text-tertiary); font-size: 0.85rem; margin-top: 6px;">26岁 · 男 · 安徽六安</div>
         </div>
         <ul class="contact-list">
             <li><i class="fas fa-phone"></i> 18576715670</li>
             <li><i class="fas fa-envelope"></i> renshuyue010103@outlook.com</li>
-            <li><i class="fas fa-graduation-cap"></i> 南京师范大学泰州学院 (法学)</li>
+            <li><i class="fas fa-graduation-cap"></i> 南师大泰州学院 (法学)</li>
             <li><i class="fas fa-language"></i> 英语六级 (CET-6)</li>
         </ul>
     </aside>
@@ -151,8 +181,8 @@
         </section>
 
         <section>
-            <h2>主导项目 (横向滑动查看)</h2>
-            <div class="project-scroll-container">
+            <h2>主导项目</h2>
+            <div class="projects-wrapper">
                 
                 <div class="project-card">
                     <span class="project-tag">品牌引流</span>
@@ -162,8 +192,12 @@
                         <li><strong>业绩：</strong> 创作100W+视频2条；GMV累计达$5W+。</li>
                     </ul>
                     <div class="project-gallery">
-                        <img src="./figures/蝴蝶刀bladeskingdom出单截图.png" alt="数据截图">
-                        <img src="./figures/蝴蝶刀账号数据.png" alt="数据截图">
+                        <img src="./figures/蝴蝶刀bladeskingdom出单截图.png" alt="出单截图">
+                        <img src="./figures/蝴蝶刀账号数据4.png" alt="数据截图">
+                        <img src="./figures/蝴蝶刀账号数据5.png" alt="你可以往这里加第三张图">
+                        <img src="./figures/蝴蝶刀账号运营数据1.png" alt="你可以往这里加第四张图">
+                        <img src="./figures/蝴蝶刀账号运营数据2.png" alt="你可以往这里加第四张图">
+                        <img src="./figures/蝴蝶刀账号运营数据3.png" alt="你可以往这里加第四张图">
                     </div>
                 </div>
 
@@ -176,7 +210,16 @@
                     </ul>
                     <div class="project-gallery">
                         <img src="./figures/宠物—出单截图1.png" alt="数据截图">
+                        <img src="./figures/宠物—出单截图2.png" alt="数据截图">
+                        <img src="./figures/宠物—出单3.png" alt="数据截图">
+                        <img src="./figures/宠物—出单截图4.png" alt="数据截图">
+                        <img src="./figures/宠物—出单5.png" alt="数据截图">
+                        <img src="./figures/宠物—出单截图6.png" alt="数据截图">
+                        <img src="./figures/宠物—出单截图7.png" alt="数据截图">
                         <img src="./figures/宠物达人视频数据1.png" alt="数据截图">
+                        <img src="./figures/宠物账号运营数据2.png" alt="数据截图">
+                        <img src="./figures/宠物账号运营数据.png" alt="数据截图">
+                        <img src="./figures/达人视频出单.png" alt="数据截图">
                     </div>
                 </div>
 
@@ -189,7 +232,8 @@
                     </ul>
                     <div class="project-gallery">
                         <img src="./figures/大马士革刀达人视频数据2.png" alt="数据截图">
-                        <img src="./figures/大马士革刀视频数据1.png" alt="数据截图">
+                        <img src="./figures/大马士革刀达人数据1.png" alt="数据截图">
+                        <img src="./figures/大马士革刀视频3.png" alt="数据截图">
                     </div>
                 </div>
 
@@ -197,14 +241,20 @@
         </section>
 
         <section>
-            <h2>工作与教育</h2>
-            <div style="background: white; padding: 25px; border-radius: 20px; border: 1px solid var(--border-light);">
-                <div style="margin-bottom: 20px;">
-                    <strong style="color: var(--text-primary);">2025.11 - 2026.05</strong> | 益维顺跨境有限公司 · TK编导
-                </div>
-                <div>
-                    <strong style="color: var(--text-primary);">2019.07 - 2023.07</strong> | 南京师范大学泰州学院 · 本科法学
-                </div>
+            <h2>工作经历</h2>
+            <div class="timeline-card">
+                <div class="timeline-date">2025.11 - 2026.05</div>
+                <div class="timeline-title">益维顺跨境有限公司</div>
+                <div class="timeline-subtitle">核心业务部 · TK短视频编导与运营</div>
+            </div>
+        </section>
+
+        <section>
+            <h2>教育背景</h2>
+            <div class="timeline-card">
+                <div class="timeline-date">2019.07 - 2023.07</div>
+                <div class="timeline-title">南京师范大学泰州学院</div>
+                <div class="timeline-subtitle">法学本科</div>
             </div>
         </section>
 
