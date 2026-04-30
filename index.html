@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>王灿 | 个人主页</title>
+    <title>王灿 | TK编导个人主页</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,15 +12,17 @@
     
     <style>
         :root {
-            --bg-color: #F8FAFC;
-            --surface-color: #FFFFFF;
-            --text-primary: #0F172A;
-            --text-secondary: #475569;
-            --text-tertiary: #94A3B8;
-            --accent-color: #3B82F6;
-            --border-light: rgba(0, 0, 0, 0.08);
-            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.04);
+            /* 暗黑高级感配色 */
+            --bg-color: #0f1115; /* 深邃黑底色 */
+            --surface-color: #1a1d24; /* 卡片底色 */
+            --text-primary: #f8fafc; /* 主标题白 */
+            --text-secondary: #cbd5e1; /* 正文灰白 */
+            --text-tertiary: #94a3b8; /* 次要信息 */
+            --accent-color: #00f2fe; /* TK风格霓虹青 */
+            --accent-hover: #fe2c55; /* TK风格霓虹红 */
+            --border-light: rgba(255, 255, 255, 0.08);
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+            --shadow-md: 0 10px 30px -3px rgba(0, 0, 0, 0.6);
             --transition: all 0.3s ease;
         }
 
@@ -31,6 +33,12 @@
             color: var(--text-secondary);
             line-height: 1.7;
         }
+        
+        /* 滚动条美化 */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-color); }
 
         .page-wrapper {
             max-width: 1300px; margin: 0 auto; padding: 40px; display: flex; gap: 50px;
@@ -44,32 +52,20 @@
         }
         .profile-img {
             width: 150px; height: 150px; border-radius: 50%; object-fit: cover; 
-            margin: 0 auto 20px; display: block; border: 4px solid #eff6ff;
+            margin: 0 auto 20px; display: block; border: 3px solid var(--accent-color);
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
         }
         .sidebar-header { text-align: center; margin-bottom: 25px; }
-        .sidebar-header h1 { font-size: 1.6rem; color: var(--text-primary); margin-bottom: 5px; }
+        .sidebar-header h1 { font-size: 1.8rem; color: var(--text-primary); margin-bottom: 5px; font-weight: 700; letter-spacing: 1px;}
         .contact-list { list-style: none; border-top: 1px solid var(--border-light); padding-top: 20px; }
-        .contact-list li { display: flex; align-items: center; margin-bottom: 12px; font-size: 0.9rem; }
-        .contact-list i { width: 25px; color: var(--accent-color); }
+        .contact-list li { display: flex; align-items: center; margin-bottom: 15px; font-size: 0.95rem; color: var(--text-secondary); }
+        .contact-list i { width: 30px; color: var(--accent-color); font-size: 1.1rem; }
 
         /* 主内容区 */
         .main-content { flex: 1; min-width: 0; }
-        section { margin-bottom: 50px; }
+        section { margin-bottom: 55px; }
         h2 { font-size: 1.6rem; color: var(--text-primary); margin-bottom: 25px; display: flex; align-items: center; }
-        h2::after { content: ''; flex: 1; height: 1px; background: #e2e8f0; margin-left: 20px; }
-
-        /* 个人能力模块 */
-        .skills-grid {
-            display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
-        }
-        .skill-item {
-            background: var(--surface-color); padding: 20px; border-radius: 16px; border: 1px solid var(--border-light);
-            transition: var(--transition);
-        }
-        .skill-item:hover { box-shadow: var(--shadow-sm); transform: translateY(-2px); border-color: #cbd5e1; }
-        .skill-item h3 { font-size: 1.05rem; color: var(--text-primary); margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
-        .skill-item i { color: var(--accent-color); }
-        .skill-item p { font-size: 0.9rem; line-height: 1.6; }
+        h2::after { content: ''; flex: 1; height: 1px; background: var(--border-light); margin-left: 20px; }
 
         /* 项目模块 (纵向排列) */
         .projects-wrapper {
@@ -77,72 +73,103 @@
         }
         
         .project-card {
-            background: var(--surface-color); border-radius: 20px; padding: 30px;
+            background: var(--surface-color); border-radius: 20px; padding: 35px;
             box-shadow: var(--shadow-md); border: 1px solid var(--border-light);
             transition: var(--transition);
         }
-        .project-card:hover { transform: translateY(-3px); border-color: var(--accent-color); box-shadow: 0 15px 25px -5px rgba(0,0,0,0.05); }
+        .project-card:hover { transform: translateY(-3px); border-color: rgba(0, 242, 254, 0.4); box-shadow: 0 15px 30px rgba(0, 242, 254, 0.05); }
         
-        .project-tag { display: inline-block; padding: 4px 14px; background: #eff6ff; color: var(--accent-color); border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 15px; }
-        .project-card h3 { font-size: 1.3rem; margin-bottom: 15px; color: var(--text-primary); }
-        .project-card ul { padding-left: 18px; margin-bottom: 20px; }
-        .project-card li { font-size: 0.95rem; margin-bottom: 8px; }
+        .project-tag { display: inline-block; padding: 5px 16px; background: rgba(0, 242, 254, 0.1); color: var(--accent-color); border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 15px; border: 1px solid rgba(0, 242, 254, 0.2); }
+        .project-card h3 { font-size: 1.4rem; margin-bottom: 20px; color: var(--text-primary); }
+        .project-card ul { padding-left: 20px; margin-bottom: 25px; color: var(--text-secondary); }
+        .project-card li { font-size: 0.95rem; margin-bottom: 10px; line-height: 1.8; }
+        .project-card li strong { color: var(--accent-hover); font-weight: 600; }
         
         /* 项目内部图片展示区 (横向滑动) */
         .project-gallery { 
             display: flex; gap: 15px; overflow-x: auto; padding-bottom: 15px;
-            scrollbar-width: thin; scrollbar-color: var(--accent-color) #f1f5f9;
         }
-        .project-gallery::-webkit-scrollbar { height: 8px; }
-        .project-gallery::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 10px; }
-        .project-gallery::-webkit-scrollbar-thumb { background: #94A3B8; border-radius: 10px; }
-        .project-gallery::-webkit-scrollbar-thumb:hover { background: var(--accent-color); }
-        
         .project-gallery img { 
-            height: 180px; /* 固定高度，宽度自适应 */
-            width: auto; 
-            min-width: 120px; /* 防止图片被压缩得太窄 */
-            object-fit: cover; 
-            border-radius: 12px; 
+            height: 180px; width: auto; min-width: 120px; object-fit: cover; 
+            border-radius: 10px; border: 1px solid var(--border-light);
+            flex-shrink: 0; transition: var(--transition);
+        }
+        .project-gallery img:hover { filter: brightness(1.2); cursor: zoom-in; border-color: var(--accent-color); }
+
+        /* 视频展示区 */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 25px;
+        }
+        .video-card {
+            background: var(--surface-color);
+            border-radius: 16px;
+            overflow: hidden;
             border: 1px solid var(--border-light);
-            flex-shrink: 0; /* 保证图片在容器内不会被挤压变形 */
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+        .video-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-hover);
+            box-shadow: 0 10px 25px rgba(254, 44, 85, 0.15);
+        }
+        .video-card video {
+            width: 100%;
+            height: 420px; /* 适配TikTok竖屏比例 */
+            object-fit: cover;
+            background: #000;
+            display: block;
+        }
+        .video-stats {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background: rgba(255,255,255,0.02);
+            border-top: 1px solid var(--border-light);
+        }
+        .stat-item {
+            display: flex; align-items: center; gap: 6px; font-size: 0.85rem; color: var(--text-primary); font-weight: 600;
+        }
+        .stat-item i.fa-play { color: var(--accent-color); }
+        .stat-item i.fa-hand-pointer { color: #a855f7; }
+        .stat-item i.fa-heart { color: var(--accent-hover); }
+
+        /* 个人能力模块 */
+        .skills-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
+        }
+        .skill-item {
+            background: var(--surface-color); padding: 25px; border-radius: 16px; border: 1px solid var(--border-light);
             transition: var(--transition);
         }
-        .project-gallery img:hover { filter: brightness(0.9); cursor: pointer; }
+        .skill-item:hover { background: rgba(255, 255, 255, 0.03); border-color: var(--accent-color); }
+        .skill-item h3 { font-size: 1.1rem; color: var(--text-primary); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .skill-item i { color: var(--accent-color); font-size: 1.2rem; }
+        .skill-item p { font-size: 0.9rem; line-height: 1.7; color: var(--text-secondary); }
 
-        /* === 新增：点击预览 Lightbox (模态框) 的 CSS === */
-        #lightbox {
-            display: none; /* 默认隐藏 */
-            position: fixed; /* 固定在全屏位置 */
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.85); /* 黑色半透明背景 */
-            z-index: 1000; /* 确保在所有元素之上 */
-            justify-content: center; align-items: center; /* 大图居中 */
-            cursor: zoom-out; /* 提示点击可以缩小/关闭 */
-            transition: all 0.3s ease;
-        }
-        #lightbox.active {
-            display: flex; /* 显示模态框 */
-        }
-        #lightbox img {
-            max-width: 90%; max-height: 90%; /* 限制大图最大为屏幕的 90% */
-            object-fit: contain; /* 保证整张图都在屏幕内，且比例不变 */
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: var(--transition);
-        }
-
-        /* 工作和教育经历卡片美化 */
+        /* 工作和教育经历卡片 */
         .timeline-card {
             background: var(--surface-color); padding: 25px; border-radius: 16px; 
-            border: 1px solid var(--border-light); border-left: 5px solid var(--accent-color); 
+            border: 1px solid var(--border-light); border-left: 4px solid var(--accent-color); 
             margin-bottom: 20px; box-shadow: var(--shadow-sm);
             transition: var(--transition);
         }
-        .timeline-card:hover { box-shadow: var(--shadow-md); transform: translateX(5px); }
-        .timeline-date { font-size: 0.9rem; color: var(--accent-color); font-weight: 700; margin-bottom: 6px; }
-        .timeline-title { font-size: 1.15rem; color: var(--text-primary); font-weight: 700; margin-bottom: 4px; }
+        .timeline-card:hover { transform: translateX(5px); background: rgba(255,255,255,0.02); }
+        .timeline-date { font-size: 0.9rem; color: var(--accent-color); font-weight: 700; margin-bottom: 8px; }
+        .timeline-title { font-size: 1.2rem; color: var(--text-primary); font-weight: 700; margin-bottom: 5px; }
         .timeline-subtitle { font-size: 0.95rem; color: var(--text-secondary); }
+
+        /* Lightbox (模态框) */
+        #lightbox {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.9); z-index: 1000;
+            justify-content: center; align-items: center; cursor: zoom-out;
+            backdrop-filter: blur(5px);
+        }
+        #lightbox.active { display: flex; }
+        #lightbox img { max-width: 90%; max-height: 90%; object-fit: contain; border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
 
         /* 响应式调整 */
         @media (max-width: 1024px) {
@@ -156,12 +183,13 @@
 <body>
 
 <div class="page-wrapper">
+    <!-- 左侧边栏 -->
     <aside class="sidebar">
         <img src="./figures/ProfilePicture.png" alt="王灿" class="profile-img">
         <div class="sidebar-header">
             <h1>王灿</h1>
-            <div style="font-size: 0.95rem; color: var(--text-secondary); font-weight: 600;">TK短视频编导 / 跨平台运营</div>
-            <div style="color: var(--text-tertiary); font-size: 0.85rem; margin-top: 6px;">26岁 · 男 · 安徽六安</div>
+            <div style="font-size: 1rem; color: var(--accent-color); font-weight: 600; margin-bottom: 8px;">TK短视频编导 / 跨平台运营</div>
+            <div style="color: var(--text-tertiary); font-size: 0.9rem;">26岁 · 男 · 安徽六安</div>
         </div>
         <ul class="contact-list">
             <li><i class="fas fa-phone"></i> 18576715670</li>
@@ -171,13 +199,88 @@
         </ul>
     </aside>
 
+    <!-- 右侧内容区 -->
     <main class="main-content">
         
         <section>
             <h2>关于我</h2>
-            <p style="font-size: 1.05rem;">
+            <p style="font-size: 1.05rem; color: var(--text-secondary);">
                 拥有近2年（2025.1-2026.5）TIKTOK短视频全链路运营经验，精通爆款复刻原理。具备平台流量逻辑与带货转化的跨平台实操能力，可快速适配不同平台特性落地高效运营策略。
             </p>
+        </section>
+
+        <section>
+            <h2>主导项目</h2>
+            <div class="projects-wrapper">
+                
+                <!-- 项目一 -->
+                <div class="project-card">
+                    <span class="project-tag">主导项目一</span>
+                    <h3>蝴蝶刀站外引流</h3>
+                    <ul>
+                        <li>负责bladeskingdom、wanderpulse.offfical短视频站外引流、品牌推广全链路运营，针对性制作高转化内容，引导流量至独立站促成成交。</li>
+                        <li>独立从0到1搭建品牌内容运营体系，制定差异化内容风格，分别覆盖想入门怕不会玩的新手(零基础动作)、想提升技巧的中级玩家(进阶连招技巧)（高阶花式）、泛兴趣人群(炫酷展示)等目标人群，精准匹配TikTok美区、欧区、俄区等用户偏好，快速实现品牌曝光和转化以及新链接的冷启动。</li>
+                        <li><strong>业绩亮点：</strong>创作 100W+ 视频2条；20W-90W+ 中小爆款达120+条。截止2025年11月wanderpulse_official 账号GMV达到$1.9w+，至2026年4月，bladeskingdom新站测试总GMV达$3.1w+。</li>
+                    </ul>
+                    <div class="project-gallery">
+                        <img src="./figures/蝴蝶刀bladeskingdom出单截图.png" alt="出单截图">
+                        <img src="./figures/蝴蝶刀账号数据4.png" alt="数据截图">
+                        <img src="./figures/蝴蝶刀账号数据5.png" alt="数据截图">
+                        <img src="./figures/蝴蝶刀账号运营数据1.png" alt="数据截图">
+                        <img src="./figures/蝴蝶刀账号运营数据2.png" alt="数据截图">
+                        <img src="./figures/蝴蝶刀账号运营数据3.png" alt="数据截图">
+                    </div>
+                </div>
+
+                <!-- 项目二 -->
+                <div class="project-card">
+                    <span class="project-tag">主导项目二</span>
+                    <h3>宠物清洁毛刷、手套</h3>
+                    <ul>
+                        <li><strong>内容策划：</strong>深度聚焦宠物毛发清洁领域，围绕养宠家庭掉毛严重、传统清洁工具效率低下等核心痛点进行选题、脚本撰写到分镜设计的全流程内容策划。</li>
+                        <li><strong>素材管理：</strong>严格控制变量法，通过A/B测试沉淀有效画面和文案资产，建立爆款画面文案素材库。</li>
+                        <li><strong>市场调研：</strong>深入分析产品生命阶段、内容模板阶段、以及客户反馈，挖掘本地用户偏好，打造符合美区调性的内容打法。</li>
+                        <li><strong>业绩亮点：</strong>2个月时自营账号joyhibe_retail、joyhibe.shop素材快速实现A/B链接冷启动,月均产出GMV达$1W+; 建联达人根据调研报告输出1条150W+爆款、并成功复刻2条小爆款，产出1.3w多美金。</li>
+                    </ul>
+                    <div class="project-gallery">
+                        <img src="./figures/宠物—出单截图1.png" alt="数据截图">
+                        <img src="./figures/宠物—出单截图2.png" alt="数据截图">
+                        <img src="./figures/宠物—出单3.png" alt="数据截图">
+                        <img src="./figures/宠物—出单截图4.png" alt="数据截图">
+                        <img src="./figures/宠物—出单5.png" alt="数据截图">
+                        <img src="./figures/宠物—出单截图6.png" alt="数据截图">
+                        <img src="./figures/宠物—出单截图7.png" alt="数据截图">
+                        <img src="./figures/宠物达人视频数据1.png" alt="数据截图">
+                        <img src="./figures/宠物账号运营数据2.png" alt="数据截图">
+                        <img src="./figures/宠物账号运营数据.png" alt="数据截图">
+                        <img src="./figures/达人视频出单.png" alt="数据截图">
+                    </div>
+                </div>
+
+                <!-- 项目三 -->
+                <div class="project-card">
+                    <span class="project-tag">主导项目三 · 代运营</span>
+                    <h3>大马士革口袋刀项目</h3>
+                    <ul>
+                        <li>主动开拓并维护刀具垂类达人资源库，负责与达人进行内容创意沟通与脚本审定。对达人原生视频进行二次创作与品牌化包装。</li>
+                        <li><strong>业绩亮点：</strong>10多个店铺达人批量复刻爆款，产出3000多单。</li>
+                    </ul>
+                    <div class="project-gallery">
+                        <img src="./figures/大马士革刀达人视频数据2.png" alt="数据截图">
+                        <img src="./figures/大马士革刀达人数据1.png" alt="数据截图">
+                        <img src="./figures/大马士革刀视频3.png" alt="数据截图">
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section>
+            <h2>个人作品集 <span style="font-size: 0.9rem; color: var(--text-tertiary); font-weight: normal; margin-left: 10px;">(原片展示，保护达人隐私)</span></h2>
+            <!-- 这个容器内的视频将由下方的 JS 自动生成 -->
+            <div class="video-grid" id="video-container">
+                <!-- 视频将自动加载到这里 -->
+            </div>
         </section>
 
         <section>
@@ -203,66 +306,6 @@
         </section>
 
         <section>
-            <h2>主导项目</h2>
-            <div class="projects-wrapper">
-                
-                <div class="project-card">
-                    <span class="project-tag">品牌引流</span>
-                    <h3>蝴蝶刀站外引流及运营</h3>
-                    <ul>
-                        <li>从0到1搭建品牌内容体系，覆盖新手、进阶及泛兴趣人群。</li>
-                        <li><strong>业绩：</strong> 创作100W+视频2条；GMV累计达$5W+。</li>
-                    </ul>
-                    <div class="project-gallery">
-                        <img src="./figures/蝴蝶刀bladeskingdom出单截图.png" alt="出单截图">
-                        <img src="./figures/蝴蝶刀账号数据4.png" alt="数据截图">
-                        <img src="./figures/蝴蝶刀账号数据5.png" alt="你可以往这里加第三张图">
-                        <img src="./figures/蝴蝶刀账号运营数据1.png" alt="你可以往这里加第四张图">
-                        <img src="./figures/蝴蝶刀账号运营数据2.png" alt="你可以往这里加第四张图">
-                        <img src="./figures/蝴蝶刀账号运营数据3.png" alt="你可以往这里加第四张图">
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <span class="project-tag">宠物赛道</span>
-                    <h3>宠物清洁毛刷、手套项目</h3>
-                    <ul>
-                        <li>聚焦养宠痛点，通过AB测试沉淀爆款素材资产库。</li>
-                        <li><strong>业绩：</strong> 月均GMV $1W+；达人复刻产出$1.3w美金。</li>
-                    </ul>
-                    <div class="project-gallery">
-                        <img src="./figures/宠物—出单截图1.png" alt="数据截图">
-                        <img src="./figures/宠物—出单截图2.png" alt="数据截图">
-                        <img src="./figures/宠物—出单3.png" alt="数据截图">
-                        <img src="./figures/宠物—出单截图4.png" alt="数据截图">
-                        <img src="./figures/宠物—出单5.png" alt="数据截图">
-                        <img src="./figures/宠物—出单截图6.png" alt="数据截图">
-                        <img src="./figures/宠物—出单截图7.png" alt="数据截图">
-                        <img src="./figures/宠物达人视频数据1.png" alt="数据截图">
-                        <img src="./figures/宠物账号运营数据2.png" alt="数据截图">
-                        <img src="./figures/宠物账号运营数据.png" alt="数据截图">
-                        <img src="./figures/达人视频出单.png" alt="数据截图">
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <span class="project-tag">达人代运营</span>
-                    <h3>大马士革口袋刀项目</h3>
-                    <ul>
-                        <li>维护刀具垂类达人库，负责内容创意沟通及脚本审定。</li>
-                        <li><strong>业绩：</strong> 批量复刻爆款，累计产出3000多单。</li>
-                    </ul>
-                    <div class="project-gallery">
-                        <img src="./figures/大马士革刀达人视频数据2.png" alt="数据截图">
-                        <img src="./figures/大马士革刀达人数据1.png" alt="数据截图">
-                        <img src="./figures/大马士革刀视频3.png" alt="数据截图">
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <section>
             <h2>工作经历</h2>
             <div class="timeline-card">
                 <div class="timeline-date">2025.11 - 2026.05</div>
@@ -282,6 +325,77 @@
 
     </main>
 </div>
+
+<!-- 图片点击放大Lightbox结构 -->
+<div id="lightbox">
+    <img id="lightbox-img" src="" alt="放大图片">
+</div>
+
+<script>
+    /* =========================================
+       视频自动加载配置区
+       在这里添加/修改你的视频路径和数据！
+       只需按格式增加，页面会自动展示所有视频。
+       ========================================= */
+    const videoData = [
+        { 
+            src: "video/program1/video1.mp4", 
+            views: "100W+",   // 播放
+            clicks: "15W+",   // 点击
+            likes: "8W+"      // 点赞
+        },
+        { 
+            src: "video/program2/video1.mp4", 
+            views: "150W+", 
+            clicks: "22W+", 
+            likes: "10W+" 
+        },
+        { 
+            src: "video/program3/video1.mp4", 
+            views: "80W+", 
+            clicks: "10W+", 
+            likes: "5W+" 
+        }
+        // 如果有第四个视频，直接在这里继续加：
+        // , { src: "video/program4/video1.mp4", views: "...", clicks: "...", likes: "..." }
+    ];
+
+    // 自动渲染视频模块脚本
+    const videoContainer = document.getElementById('video-container');
+    videoData.forEach(video => {
+        const videoCard = document.createElement('div');
+        videoCard.className = 'video-card';
+        videoCard.innerHTML = `
+            <video controls preload="metadata" src="${video.src}"></video>
+            <div class="video-stats">
+                <div class="stat-item" title="播放量"><i class="fas fa-play"></i> ${video.views}</div>
+                <div class="stat-item" title="点击量"><i class="fas fa-hand-pointer"></i> ${video.clicks}</div>
+                <div class="stat-item" title="点赞量"><i class="fas fa-heart"></i> ${video.likes}</div>
+            </div>
+        `;
+        videoContainer.appendChild(videoCard);
+    });
+
+    /* =========================================
+       图片点击放大 (Lightbox) 交互逻辑
+       ========================================= */
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const galleryImages = document.querySelectorAll('.project-gallery img');
+
+    // 为每张项目图片添加点击事件
+    galleryImages.forEach(img => {
+        img.addEventListener('click', () => {
+            lightboxImg.src = img.src; // 把点击的图片路径赋给大图
+            lightbox.classList.add('active'); // 显示模态框
+        });
+    });
+
+    // 点击模态框任何地方即可关闭
+    lightbox.addEventListener('click', () => {
+        lightbox.classList.remove('active');
+    });
+</script>
 
 </body>
 </html>
