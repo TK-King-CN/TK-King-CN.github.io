@@ -3,272 +3,295 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>王灿 | TK编导个人主页</title>
+    <title>王灿 | 资深TK短视频编导</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            /* 暗黑高级感配色 */
-            --bg-color: #0f1115; /* 深邃黑底色 */
-            --surface-color: #1a1d24; /* 卡片底色 */
-            --text-primary: #f8fafc; /* 主标题白 */
-            --text-secondary: #cbd5e1; /* 正文灰白 */
-            --text-tertiary: #94a3b8; /* 次要信息 */
-            --accent-color: #00f2fe; /* TK风格霓虹青 */
-            --accent-hover: #fe2c55; /* TK风格霓虹红 */
-            --border-light: rgba(255, 255, 255, 0.08);
-            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
-            --shadow-md: 0 10px 30px -3px rgba(0, 0, 0, 0.6);
-            --transition: all 0.3s ease;
+            /* 顶级毛玻璃暗调光晕配色 */
+            --bg-base: #0B0F19; /* 极深蓝灰底色 */
+            --surface-glass: rgba(26, 32, 53, 0.6); /* 半透明磨砂卡片 */
+            --border-glass: rgba(255, 255, 255, 0.06);
+            --text-primary: #F8FAFC;
+            --text-secondary: #94A3B8;
+            --accent-main: #00f2fe; /* 极光青 */
+            --accent-gradient: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+            --accent-gradient-text: linear-gradient(to right, #00f2fe, #a855f7, #fe2c55);
+            --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* 隐藏默认鼠标，给PC端使用自定义鼠标 */
+        @media (pointer: fine) {
+            * { cursor: none !important; }
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        
         body {
             font-family: 'Inter', "Microsoft YaHei", sans-serif;
-            background-color: var(--bg-color);
+            background-color: var(--bg-base);
+            /* 背景氛围光晕 */
+            background-image: 
+                radial-gradient(circle at 15% 30%, rgba(0, 242, 254, 0.06) 0%, transparent 40%),
+                radial-gradient(circle at 85% 70%, rgba(254, 44, 85, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.03) 0%, transparent 50%);
+            background-attachment: fixed;
             color: var(--text-secondary);
-            line-height: 1.7;
+            line-height: 1.8;
+            overflow-x: hidden;
         }
         
-        /* 滚动条美化 */
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-color); }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--accent-color); }
+        /* 滚动条极简化 */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-main); }
 
         .page-wrapper {
-            max-width: 1300px; margin: 0 auto; padding: 40px; display: flex; gap: 50px;
+            max-width: 1300px; margin: 0 auto; padding: 50px 40px; display: flex; gap: 60px;
+            position: relative; z-index: 1;
         }
 
-        /* 侧边栏 */
+        /* === 毛玻璃通用样式 === */
+        .glass-card {
+            background: var(--surface-glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-glass);
+            border-radius: 24px;
+            box-shadow: var(--shadow-glass);
+        }
+
+        /* 左侧边栏 */
         .sidebar {
-            flex: 0 0 300px; background: var(--surface-color); border-radius: 24px; padding: 40px 25px;
-            box-shadow: var(--shadow-md); border: 1px solid var(--border-light);
-            position: sticky; top: 40px; height: fit-content;
+            flex: 0 0 320px; padding: 45px 30px; position: sticky; top: 50px; height: fit-content;
         }
+        .profile-img-wrap {
+            position: relative; width: 160px; height: 160px; margin: 0 auto 25px;
+        }
+        .profile-img-wrap::before {
+            content: ''; position: absolute; inset: -4px; border-radius: 50%;
+            background: var(--accent-gradient-text); animation: spin 4s linear infinite; z-index: -1;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
         .profile-img {
-            width: 150px; height: 150px; border-radius: 50%; object-fit: cover; 
-            margin: 0 auto 20px; display: block; border: 3px solid var(--accent-color);
-            box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
+            width: 100%; height: 100%; border-radius: 50%; object-fit: cover; 
+            border: 4px solid var(--bg-base);
         }
-        .sidebar-header { text-align: center; margin-bottom: 25px; }
-        .sidebar-header h1 { font-size: 1.8rem; color: var(--text-primary); margin-bottom: 5px; font-weight: 700; letter-spacing: 1px;}
-        .contact-list { list-style: none; border-top: 1px solid var(--border-light); padding-top: 20px; }
-        .contact-list li { display: flex; align-items: center; margin-bottom: 15px; font-size: 0.95rem; color: var(--text-secondary); }
-        .contact-list i { width: 30px; color: var(--accent-color); font-size: 1.1rem; }
+        .sidebar-header { text-align: center; margin-bottom: 30px; }
+        .sidebar-header h1 { font-size: 2rem; color: var(--text-primary); margin-bottom: 5px; font-weight: 800; letter-spacing: 2px;}
+        .title-badge {
+            display: inline-block; padding: 6px 16px; background: rgba(0, 242, 254, 0.1);
+            color: var(--accent-main); border-radius: 30px; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(0, 242, 254, 0.2);
+        }
+        .contact-list { list-style: none; padding-top: 20px; }
+        .contact-list li { display: flex; align-items: center; margin-bottom: 18px; font-size: 0.95rem; color: #cbd5e1; }
+        .contact-list i { width: 35px; background: -webkit-linear-gradient(135deg, #00f2fe, #4facfe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.2rem; }
 
         /* 主内容区 */
         .main-content { flex: 1; min-width: 0; }
-        section { margin-bottom: 55px; }
-        h2 { font-size: 1.6rem; color: var(--text-primary); margin-bottom: 25px; display: flex; align-items: center; }
-        h2::after { content: ''; flex: 1; height: 1px; background: var(--border-light); margin-left: 20px; }
+        section { margin-bottom: 60px; }
+        h2 { 
+            font-size: 1.8rem; color: var(--text-primary); margin-bottom: 30px; display: flex; align-items: center; font-weight: 800;
+        }
+        h2::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border-glass), transparent); margin-left: 20px; }
 
-        /* 项目模块 (纵向排列) */
-        .projects-wrapper {
-            display: flex; flex-direction: column; gap: 35px;
+        /* 杀手级“关于我”设计 */
+        .about-me-box {
+            padding: 35px; border-left: 4px solid var(--accent-main);
         }
-        
-        .project-card {
-            background: var(--surface-color); border-radius: 20px; padding: 35px;
-            box-shadow: var(--shadow-md); border: 1px solid var(--border-light);
-            transition: var(--transition);
+        .about-quote {
+            font-size: 1.3rem; font-weight: 700; margin-bottom: 15px;
+            background: var(--accent-gradient-text);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-        .project-card:hover { transform: translateY(-3px); border-color: rgba(0, 242, 254, 0.4); box-shadow: 0 15px 30px rgba(0, 242, 254, 0.05); }
-        
-        .project-tag { display: inline-block; padding: 5px 16px; background: rgba(0, 242, 254, 0.1); color: var(--accent-color); border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 15px; border: 1px solid rgba(0, 242, 254, 0.2); }
-        .project-card h3 { font-size: 1.4rem; margin-bottom: 20px; color: var(--text-primary); }
-        .project-card ul { padding-left: 20px; margin-bottom: 25px; color: var(--text-secondary); }
-        .project-card li { font-size: 0.95rem; margin-bottom: 10px; line-height: 1.8; }
-        .project-card li strong { color: var(--accent-hover); font-weight: 600; }
-        
-        /* 项目内部图片展示区 (横向滑动) */
-        .project-gallery { 
-            display: flex; gap: 15px; overflow-x: auto; padding-bottom: 15px;
+        .about-text { font-size: 1rem; color: var(--text-secondary); line-height: 1.9; margin-bottom: 20px;}
+        .about-text strong { color: #fff; font-weight: 600; }
+        .core-tags { display: flex; gap: 15px; flex-wrap: wrap; }
+        .core-tags span {
+            background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass);
+            padding: 8px 18px; border-radius: 12px; font-size: 0.9rem; color: #e2e8f0;
+            display: flex; align-items: center; gap: 8px; transition: var(--transition);
         }
+        .core-tags span:hover { background: rgba(0, 242, 254, 0.1); border-color: var(--accent-main); transform: translateY(-2px); }
+
+        /* 项目模块 */
+        .projects-wrapper { display: flex; flex-direction: column; gap: 40px; }
+        .project-card { padding: 40px; transition: var(--transition); }
+        .project-card:hover { border-color: rgba(0, 242, 254, 0.3); transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .project-tag { display: inline-block; padding: 4px 12px; background: rgba(255,255,255,0.05); color: var(--text-primary); border-radius: 8px; font-size: 0.8rem; margin-bottom: 20px; letter-spacing: 1px;}
+        .project-card h3 { font-size: 1.5rem; margin-bottom: 20px; color: var(--text-primary); }
+        .project-card ul { padding-left: 20px; margin-bottom: 30px; }
+        .project-card li { font-size: 0.95rem; margin-bottom: 12px; }
+        .highlight-text { color: #a855f7; font-weight: 700; } /* 业绩高亮 */
+
+        /* 项目图片横向展示 */
+        .project-gallery { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 10px; }
         .project-gallery img { 
-            height: 180px; width: auto; min-width: 120px; object-fit: cover; 
-            border-radius: 10px; border: 1px solid var(--border-light);
-            flex-shrink: 0; transition: var(--transition);
+            height: 180px; width: auto; border-radius: 12px; border: 1px solid var(--border-glass);
+            flex-shrink: 0; transition: var(--transition); filter: grayscale(20%);
         }
-        .project-gallery img:hover { filter: brightness(1.2); cursor: zoom-in; border-color: var(--accent-color); }
+        .project-gallery img:hover { filter: grayscale(0%); transform: scale(1.02); border-color: var(--accent-main); }
 
         /* 视频展示区 */
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 25px;
-        }
-        .video-card {
-            background: var(--surface-color);
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid var(--border-light);
-            transition: var(--transition);
-            box-shadow: var(--shadow-sm);
-        }
-        .video-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-hover);
-            box-shadow: 0 10px 25px rgba(254, 44, 85, 0.15);
-        }
-        .video-card video {
-            width: 100%;
-            height: 420px; /* 适配TikTok竖屏比例 */
-            object-fit: cover;
-            background: #000;
-            display: block;
-        }
-        .video-stats {
-            display: flex;
-            justify-content: space-between;
-            padding: 15px 20px;
-            background: rgba(255,255,255,0.02);
-            border-top: 1px solid var(--border-light);
-        }
-        .stat-item {
-            display: flex; align-items: center; gap: 6px; font-size: 0.85rem; color: var(--text-primary); font-weight: 600;
-        }
-        .stat-item i.fa-play { color: var(--accent-color); }
-        .stat-item i.fa-hand-pointer { color: #a855f7; }
-        .stat-item i.fa-heart { color: var(--accent-hover); }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 25px; }
+        .video-card { overflow: hidden; padding: 0; border-radius: 16px; }
+        .video-card:hover { border-color: rgba(254, 44, 85, 0.4); transform: translateY(-5px); }
+        .video-card video { width: 100%; height: 420px; object-fit: cover; background: #000; display: block; }
+        .video-stats { display: flex; justify-content: space-between; padding: 15px 20px; background: rgba(0,0,0,0.2); }
+        .stat-item { display: flex; align-items: center; gap: 6px; font-size: 0.85rem; color: #fff; font-weight: 600;}
+        .stat-item i { color: var(--accent-main); }
 
-        /* 个人能力模块 */
-        .skills-grid {
-            display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
-        }
-        .skill-item {
-            background: var(--surface-color); padding: 25px; border-radius: 16px; border: 1px solid var(--border-light);
-            transition: var(--transition);
-        }
-        .skill-item:hover { background: rgba(255, 255, 255, 0.03); border-color: var(--accent-color); }
-        .skill-item h3 { font-size: 1.1rem; color: var(--text-primary); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
-        .skill-item i { color: var(--accent-color); font-size: 1.2rem; }
-        .skill-item p { font-size: 0.9rem; line-height: 1.7; color: var(--text-secondary); }
+        /* 个人能力 */
+        .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; }
+        .skill-item { padding: 30px; transition: var(--transition); }
+        .skill-item:hover { background: linear-gradient(145deg, rgba(26, 32, 53, 0.8), rgba(0, 242, 254, 0.05)); border-color: var(--accent-main); }
+        .skill-icon-wrap { width: 50px; height: 50px; background: rgba(0, 242, 254, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 1.5rem; color: var(--accent-main); }
+        .skill-item h3 { font-size: 1.2rem; color: #fff; margin-bottom: 10px; }
 
-        /* 工作和教育经历卡片 */
-        .timeline-card {
-            background: var(--surface-color); padding: 25px; border-radius: 16px; 
-            border: 1px solid var(--border-light); border-left: 4px solid var(--accent-color); 
-            margin-bottom: 20px; box-shadow: var(--shadow-sm);
-            transition: var(--transition);
-        }
-        .timeline-card:hover { transform: translateX(5px); background: rgba(255,255,255,0.02); }
-        .timeline-date { font-size: 0.9rem; color: var(--accent-color); font-weight: 700; margin-bottom: 8px; }
-        .timeline-title { font-size: 1.2rem; color: var(--text-primary); font-weight: 700; margin-bottom: 5px; }
-        .timeline-subtitle { font-size: 0.95rem; color: var(--text-secondary); }
+        /* 经历卡片 */
+        .timeline-card { padding: 30px; border-left: 4px solid var(--accent-main); margin-bottom: 20px; }
+        .timeline-card:hover { transform: translateX(10px); background: rgba(255,255,255,0.03); }
 
-        /* Lightbox (模态框) */
+        /* === 自定义鼠标与点击特效 CSS === */
+        .cursor-dot {
+            width: 8px; height: 8px; background: var(--accent-main); border-radius: 50%;
+            position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
+            transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s, background-color 0.2s;
+            box-shadow: 0 0 10px var(--accent-main);
+        }
+        .cursor-outline {
+            width: 36px; height: 36px; border: 1px solid rgba(0, 242, 254, 0.5); border-radius: 50%;
+            position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9998;
+            transform: translate(-50%, -50%); transition: transform 0.1s ease-out, width 0.2s, height 0.2s;
+        }
+        /* 鼠标悬停时的磁性放大效果 */
+        .hover-target .cursor-dot { background: #fe2c55; box-shadow: 0 0 15px #fe2c55; }
+        .hover-target .cursor-outline { width: 60px; height: 60px; border-color: rgba(254, 44, 85, 0.4); background: rgba(254, 44, 85, 0.05); backdrop-filter: blur(2px); }
+
+        /* 点击水波纹 */
+        .click-ripple {
+            position: fixed; border: 2px solid var(--accent-main); border-radius: 50%;
+            transform: translate(-50%, -50%); pointer-events: none; z-index: 9997;
+            animation: ripple-anim 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+        @keyframes ripple-anim {
+            0% { width: 0; height: 0; opacity: 1; border-width: 4px; }
+            100% { width: 100px; height: 100px; opacity: 0; border-width: 1px; }
+        }
+
+        /* Lightbox */
         #lightbox {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.9); z-index: 1000;
-            justify-content: center; align-items: center; cursor: zoom-out;
-            backdrop-filter: blur(5px);
+            display: none; position: fixed; inset: 0; background: rgba(11, 15, 25, 0.95); z-index: 10000;
+            justify-content: center; align-items: center; backdrop-filter: blur(10px);
         }
         #lightbox.active { display: flex; }
-        #lightbox img { max-width: 90%; max-height: 90%; object-fit: contain; border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
+        #lightbox img { max-width: 90%; max-height: 90%; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); border: 1px solid var(--border-glass); }
 
-        /* 响应式调整 */
-        @media (max-width: 1024px) {
-            .page-wrapper { flex-direction: column; }
-            .sidebar { position: relative; top: 0; width: 100%; }
-            .skills-grid { grid-template-columns: 1fr; }
-            .project-gallery img { height: 150px; }
-        }
     </style>
 </head>
 <body>
 
+<!-- 自定义鼠标元素 -->
+<div class="cursor-dot" id="cursor-dot"></div>
+<div class="cursor-outline" id="cursor-outline"></div>
+
 <div class="page-wrapper">
-    <!-- 左侧边栏 -->
-    <aside class="sidebar">
-        <img src="./figures/ProfilePicture.png" alt="王灿" class="profile-img">
+    <aside class="sidebar glass-card">
+        <div class="profile-img-wrap hover-trigger">
+            <img src="./figures/ProfilePicture.png" alt="王灿" class="profile-img">
+        </div>
         <div class="sidebar-header">
             <h1>王灿</h1>
-            <div style="font-size: 1rem; color: var(--accent-color); font-weight: 600; margin-bottom: 8px;">TK短视频编导 / 跨平台运营</div>
-            <div style="color: var(--text-tertiary); font-size: 0.9rem;">26岁 · 男 · 安徽六安</div>
+            <div class="title-badge">资深 TK 全链路编导</div>
+            <div style="color: var(--text-tertiary); font-size: 0.85rem; margin-top: 12px;">26岁 · 男 · 坐标驱动全球流量</div>
         </div>
         <ul class="contact-list">
-            <li><i class="fas fa-phone"></i> 18576715670</li>
-            <li><i class="fas fa-envelope"></i> renshuyue010103@outlook.com</li>
-            <li><i class="fas fa-graduation-cap"></i> 南师大泰州学院 (法学)</li>
-            <li><i class="fas fa-language"></i> 英语六级 (CET-6)</li>
+            <li class="hover-trigger"><i class="fas fa-mobile-alt"></i> 18576715670</li>
+            <li class="hover-trigger"><i class="fas fa-paper-plane"></i> renshuyue010103@outlook.com</li>
+            <li><i class="fas fa-university"></i> 南师大泰州学院 (法学)</li>
+            <li><i class="fas fa-globe-americas"></i> 英语六级 (无障碍洞察欧美生态)</li>
         </ul>
     </aside>
 
-    <!-- 右侧内容区 -->
     <main class="main-content">
         
+        <!-- 极致竞争力的“关于我” -->
         <section>
-            <h2>关于我</h2>
-            <p style="font-size: 1.05rem; color: var(--text-secondary);">
-                拥有近2年（2025.1-2026.5）TIKTOK短视频全链路运营经验，精通爆款复刻原理。具备平台流量逻辑与带货转化的跨平台实操能力，可快速适配不同平台特性落地高效运营策略。
-            </p>
+            <h2>操盘手简介</h2>
+            <div class="glass-card about-me-box">
+                <div class="about-quote">“我不只是在剪辑视频，我是在批量生产能撬动美金的流量引擎。”</div>
+                <p class="about-text">
+                    拥有近2年深耕TikTok生态的实战操盘经验。我不仅是一个懂视听语言的编导，更是一个<strong>极度依赖数据和A/B测试</strong>的商业化推手。<br>
+                    从0到1搭建品牌内容体系、制定跨区（美/欧/俄）差异化打法、精准沉淀高转化素材库——我的核心目标永远只有一个：<strong>用最低的试错成本，把网感和创意，转化为账面上的GMV与爆款利润。</strong>
+                </p>
+                <div class="core-tags">
+                    <span class="hover-trigger">🎯 毒辣的爆款嗅觉</span>
+                    <span class="hover-trigger">📊 严密的数据复盘思维</span>
+                    <span class="hover-trigger">💰 商业闭环操盘能力</span>
+                    <span class="hover-trigger">🎬 跨文化内容精准定调</span>
+                </div>
+            </div>
         </section>
 
+        <!-- 主导项目 -->
         <section>
-            <h2>主导项目</h2>
+            <h2>核心战绩与主导项目</h2>
             <div class="projects-wrapper">
                 
-                <!-- 项目一 -->
-                <div class="project-card">
-                    <span class="project-tag">主导项目一</span>
-                    <h3>蝴蝶刀站外引流</h3>
+                <div class="project-card glass-card">
+                    <div class="project-tag">主导项目 01 · 品牌独立站引流</div>
+                    <h3>蝴蝶刀 (Bladeskingdom) 全链路运营</h3>
                     <ul>
-                        <li>负责bladeskingdom、wanderpulse.offfical短视频站外引流、品牌推广全链路运营，针对性制作高转化内容，引导流量至独立站促成成交。</li>
-                        <li>独立从0到1搭建品牌内容运营体系，制定差异化内容风格，分别覆盖想入门怕不会玩的新手(零基础动作)、想提升技巧的中级玩家(进阶连招技巧)（高阶花式）、泛兴趣人群(炫酷展示)等目标人群，精准匹配TikTok美区、欧区、俄区等用户偏好，快速实现品牌曝光和转化以及新链接的冷启动。</li>
-                        <li><strong>业绩亮点：</strong>创作 100W+ 视频2条；20W-90W+ 中小爆款达120+条。截止2025年11月wanderpulse_official 账号GMV达到$1.9w+，至2026年4月，bladeskingdom新站测试总GMV达$3.1w+。</li>
+                        <li>负责双矩阵账号的站外引流与品牌推广，针对性制作高转化内容，成功构建流量至独立站的成交漏斗。</li>
+                        <li>独立从0搭建品牌内容体系。精准拆解用户画像，制定阶梯式内容策略：覆盖新手（零基础）、中高阶（炫技进阶）及泛兴趣人群，精准击穿多国受众偏好，实现新链接极速冷启动。</li>
+                        <li><strong>业绩战报：</strong>产出 <span class="highlight-text">百万级(100W+)爆款2条</span>；打造20W-90W中小爆款矩阵 <span class="highlight-text">120+条</span>。至26年4月测试期累计GMV破 <span class="highlight-text">$50,000+美金</span>。</li>
                     </ul>
                     <div class="project-gallery">
-                        <img src="./figures/蝴蝶刀bladeskingdom出单截图.png" alt="出单截图">
-                        <img src="./figures/蝴蝶刀账号数据4.png" alt="数据截图">
-                        <img src="./figures/蝴蝶刀账号数据5.png" alt="数据截图">
-                        <img src="./figures/蝴蝶刀账号运营数据1.png" alt="数据截图">
-                        <img src="./figures/蝴蝶刀账号运营数据2.png" alt="数据截图">
-                        <img src="./figures/蝴蝶刀运营数据3.png" alt="数据截图">
+                        <img src="./figures/蝴蝶刀bladeskingdom出单截图.png" alt="出单截图" class="hover-trigger">
+                        <img src="./figures/蝴蝶刀账号数据4.png" alt="数据" class="hover-trigger">
+                        <img src="./figures/蝴蝶刀账号数据5.png" alt="数据" class="hover-trigger">
+                        <img src="./figures/蝴蝶刀账号运营数据1.png" alt="数据" class="hover-trigger">
+                        <img src="./figures/蝴蝶刀账号运营数据2.png" alt="数据" class="hover-trigger">
+                        <img src="./figures/蝴蝶刀账号运营数据3.png" alt="数据" class="hover-trigger">
                     </div>
                 </div>
 
-                <!-- 项目二 -->
-                <div class="project-card">
-                    <span class="project-tag">主导项目二</span>
-                    <h3>宠物清洁毛刷、手套</h3>
+                <div class="project-card glass-card">
+                    <div class="project-tag">主导项目 02 · 垂类爆款孵化</div>
+                    <h3>宠物清洁毛刷与手套</h3>
                     <ul>
-                        <li><strong>内容策划：</strong>深度聚焦宠物毛发清洁领域，围绕养宠家庭掉毛严重、传统清洁工具效率低下等核心痛点进行选题、脚本撰写到分镜设计的全流程内容策划。</li>
-                        <li><strong>素材管理：</strong>严格控制变量法，通过A/B测试沉淀有效画面和文案资产，建立爆款画面文案素材库。</li>
-                        <li><strong>市场调研：</strong>深入分析产品生命阶段、内容模板阶段、以及客户反馈，挖掘本地用户偏好，打造符合美区调性的内容打法。</li>
-                        <li><strong>业绩亮点：</strong>2个月时自营账号joyhibe_retail、joyhibe.shop素材快速实现A/B链接冷启动,月均产出GMV达$1W+; 建联达人根据调研报告输出1条150W+爆款、并成功复刻2条小爆款，产出1.3w多美金。</li>
+                        <li><strong>内容策划：</strong>深度切入养宠家庭“掉毛痛点”，主导从痛点洞察、选题策划、脚本撰写到分镜设计的全流程。</li>
+                        <li><strong>素材资产化：</strong>严守控制变量法，通过高频 A/B 测试筛选高转化画面与文案，成功沉淀品牌专属爆款素材库。</li>
+                        <li><strong>市场调研：</strong>拆解产品生命周期与竞品模板，反哺本地化内容策略，打造纯正“美区调性”。</li>
+                        <li><strong>业绩战报：</strong>2个月实现自营矩阵A/B链接冷启动，月均稳定产出 <span class="highlight-text">GMV $10,000+</span>；赋能建联达人输出 <span class="highlight-text">150W+超级爆款1条</span>，直接撬动 $1.3W+ 美金收益。</li>
                     </ul>
                     <div class="project-gallery">
-                        <img src="./figures/宠物—出单截图1.png" alt="数据截图">
-                        <img src="./figures/宠物—出单截图2.png" alt="数据截图">
-                        <img src="./figures/宠物—出单3.png" alt="数据截图">
-                        <img src="./figures/宠物—出单截图4.png" alt="数据截图">
-                        <img src="./figures/宠物—出单5.png" alt="数据截图">
-                        <img src="./figures/宠物—出单截图6.png" alt="数据截图">
-                        <img src="./figures/宠物—出单截图7.png" alt="数据截图">
-                        <img src="./figures/宠物达人视频数据1.png" alt="数据截图">
-                        <img src="./figures/宠物账号运营数据2.png" alt="数据截图">
-                        <img src="./figures/宠物账号运营数据.png" alt="数据截图">
-                        <img src="./figures/达人视频出单.png" alt="数据截图">
+                        <img src="./figures/宠物—出单截图1.png" alt="数据" class="hover-trigger">
+                        <img src="./figures/宠物—出单截图2.png" alt="数据" class="hover-trigger">
+                        <img src="./figures/宠物—出单3.png" alt="数据" class="hover-trigger">
+                        <img src="./figures/宠物—出单截图4.png" alt="数据" class="hover-trigger">
+                        <img src="./figures/宠物—出单5.png" alt="数据" class="hover-trigger">
+                        <img src="./figures/达人视频出单.png" alt="数据" class="hover-trigger">
                     </div>
                 </div>
 
-                <!-- 项目三 -->
-                <div class="project-card">
-                    <span class="project-tag">主导项目三 · 代运营</span>
-                    <h3>大马士革口袋刀项目</h3>
+                <div class="project-card glass-card">
+                    <div class="project-tag">主导项目 03 · 达人资源盘活</div>
+                    <h3>大马士革口袋刀【代运营】</h3>
                     <ul>
-                        <li>主动开拓并维护刀具垂类达人资源库，负责与达人进行内容创意沟通与脚本审定。对达人原生视频进行二次创作与品牌化包装。</li>
-                        <li><strong>业绩亮点：</strong>10多个店铺达人批量复刻爆款，产出3000多单。</li>
+                        <li>精准拓源并深耕刀具垂类达人私域库，全权负责内容共创与脚本审阅，对原生视频进行商业化与品牌化二次重构。</li>
+                        <li><strong>业绩战报：</strong>指导10余个店铺达人成功实现批量化爆款复刻，单项目斩获 <span class="highlight-text">3000+ 订单</span>。</li>
                     </ul>
                     <div class="project-gallery">
-                        <img src="./figures/大马士革刀达人视频数据2.png" alt="数据截图">
-                        <img src="./figures/大马士革刀达人数据1.png" alt="数据截图">
-                        <img src="./figures/大马士革刀视频3.png" alt="数据截图">
+                        <img src="./figures/大马士革刀达人视频数据2.png" alt="数据" class="hover-trigger">
+                        <img src="./figures/大马士革刀达人数据1.png" alt="数据" class="hover-trigger">
+                        <img src="./figures/大马士革刀视频3.png" alt="数据" class="hover-trigger">
                     </div>
                 </div>
 
@@ -276,122 +299,141 @@
         </section>
 
         <section>
-            <h2>个人作品集 <span style="font-size: 0.9rem; color: var(--text-tertiary); font-weight: normal; margin-left: 10px;">(原片展示，保护达人隐私)</span></h2>
-            <!-- 这个容器内的视频将由下方的 JS 自动生成 -->
-            <div class="video-grid" id="video-container">
-                <!-- 视频将自动加载到这里 -->
-            </div>
+            <h2>高能原片作品集 <span style="font-size: 0.9rem; color: #64748b; font-weight: normal; margin-left: 10px;">(去重与隐私保护版)</span></h2>
+            <div class="video-grid" id="video-container"></div>
         </section>
 
         <section>
-            <h2>个人能力</h2>
+            <h2>硬核技能栈</h2>
             <div class="skills-grid">
-                <div class="skill-item">
-                    <h3><i class="fas fa-search-dollar"></i> 市场调研</h3>
-                    <p>快速捕捉内容流量趋势，定制化迎合市场用户需求，输出符合达人带货风格的高质量脚本。</p>
+                <div class="skill-item glass-card hover-trigger">
+                    <div class="skill-icon-wrap"><i class="fas fa-crosshairs"></i></div>
+                    <h3>商业流量洞察</h3>
+                    <p>拒绝自嗨式创作。通过第三方数据平台深挖TikTok算法底层逻辑，精准捕捉趋势BGM与热点模因。</p>
                 </div>
-                <div class="skill-item">
-                    <h3><i class="fas fa-chart-line"></i> 视频运营</h3>
-                    <p>精通TikTok平台规则、算法及运营策略，擅长制定高转化的内容规划与用户增长方案。</p>
+                <div class="skill-item glass-card hover-trigger">
+                    <div class="skill-icon-wrap"><i class="fas fa-vial"></i></div>
+                    <h3>A/B 测试与素材裂变</h3>
+                    <p>熟练运用变量控制法解构爆款基因，实现优质视觉与文案资产的模块化复用与裂变。</p>
                 </div>
-                <div class="skill-item">
-                    <h3><i class="fas fa-video"></i> 拍摄剪辑</h3>
-                    <p>熟练运用拍摄设备和剪辑软件，能够独立完成剪辑、特效制作与后期合成。</p>
+                <div class="skill-item glass-card hover-trigger">
+                    <div class="skill-icon-wrap"><i class="fas fa-film"></i></div>
+                    <h3>全链路视听制作</h3>
+                    <p>精通前后期全案。擅长控制前3秒黄金Hook率及完播率节奏，独立把控高质量成片交付。</p>
                 </div>
-                <div class="skill-item">
-                    <h3><i class="fas fa-database"></i> 数据分析</h3>
-                    <p>利用第三方工具深度解构账号表现，为内容优化与投流策略提供精准数据支撑。</p>
+                <div class="skill-item glass-card hover-trigger">
+                    <div class="skill-icon-wrap"><i class="fas fa-handshake"></i></div>
+                    <h3>跨文化达人建联</h3>
+                    <p>基于对海外受众心理的理解，无障碍完成海外垂类KOL/KOC的沟通、议价及脚本指导。</p>
                 </div>
             </div>
         </section>
 
         <section>
-            <h2>工作经历</h2>
-            <div class="timeline-card">
-                <div class="timeline-date">2025.11 - 2026.05</div>
-                <div class="timeline-title">益维顺跨境有限公司</div>
-                <div class="timeline-subtitle">核心业务部 · TK短视频编导与运营</div>
+            <h2>职业履历</h2>
+            <div class="timeline-card glass-card hover-trigger">
+                <div style="font-size: 0.9rem; color: var(--accent-main); font-weight: 700; margin-bottom: 5px;">2025.01 - 2026.05</div>
+                <div style="font-size: 1.3rem; color: #fff; font-weight: 700; margin-bottom: 2px;">益维顺跨境有限公司</div>
+                <div style="font-size: 0.95rem; color: var(--text-secondary);">核心业务部 · TK短视频编导与运营</div>
             </div>
         </section>
 
         <section>
             <h2>教育背景</h2>
-            <div class="timeline-card">
-                <div class="timeline-date">2019.07 - 2023.07</div>
-                <div class="timeline-title">南京师范大学泰州学院</div>
-                <div class="timeline-subtitle">法学本科</div>
+            <div class="timeline-card glass-card hover-trigger">
+                <div style="font-size: 0.9rem; color: var(--accent-main); font-weight: 700; margin-bottom: 5px;">2019.07 - 2023.07</div>
+                <div style="font-size: 1.3rem; color: #fff; font-weight: 700; margin-bottom: 2px;">南京师范大学泰州学院</div>
+                <div style="font-size: 0.95rem; color: var(--text-secondary);">法学本科 <span style="font-size:0.85rem; color:#64748b; margin-left:10px;">(赋予严密的逻辑思维与规则解读能力)</span></div>
             </div>
         </section>
 
     </main>
 </div>
 
-<!-- 图片点击放大Lightbox结构 -->
+<!-- 图片放大模态框 -->
 <div id="lightbox">
     <img id="lightbox-img" src="" alt="放大图片">
 </div>
 
 <script>
     /* =========================================
-       视频自动加载配置区
-       在这里添加/修改你的视频路径和数据！
-       只需按格式增加，页面会自动展示所有视频。
+       1. 视频自动渲染模块
        ========================================= */
     const videoData = [
-        { 
-            src: "video/program1/video1.mp4", 
-            views: "100W+",   // 播放
-            clicks: "15W+",   // 点击
-            likes: "8W+"      // 点赞
-        },
-        { 
-            src: "video/program2/video1.mp4", 
-            views: "150W+", 
-            clicks: "22W+", 
-            likes: "10W+" 
-        },
-        { 
-            src: "video/program3/video1.mp4", 
-            views: "80W+", 
-            clicks: "10W+", 
-            likes: "5W+" 
-        }
-        // 如果有第四个视频，直接在这里继续加：
-        // , { src: "video/program4/video1.mp4", views: "...", clicks: "...", likes: "..." }
+        { src: "video/program1/video1.mp4", views: "100W+", clicks: "15W+", likes: "8W+" },
+        { src: "video/program2/video1.mp4", views: "150W+", clicks: "22W+", likes: "10W+" },
+        { src: "video/program3/video1.mp4", views: "80W+", clicks: "10W+", likes: "5W+" }
     ];
 
-    // 自动渲染视频模块脚本
     const videoContainer = document.getElementById('video-container');
     videoData.forEach(video => {
         const videoCard = document.createElement('div');
-        videoCard.className = 'video-card';
+        videoCard.className = 'video-card glass-card hover-trigger';
         videoCard.innerHTML = `
             <video controls preload="metadata" src="${video.src}"></video>
             <div class="video-stats">
-                <div class="stat-item" title="播放量"><i class="fas fa-play"></i> ${video.views}</div>
-                <div class="stat-item" title="点击量"><i class="fas fa-hand-pointer"></i> ${video.clicks}</div>
-                <div class="stat-item" title="点赞量"><i class="fas fa-heart"></i> ${video.likes}</div>
+                <div class="stat-item"><i class="fas fa-play"></i> ${video.views}</div>
+                <div class="stat-item"><i class="fas fa-hand-pointer" style="color:#a855f7;"></i> ${video.clicks}</div>
+                <div class="stat-item"><i class="fas fa-heart" style="color:#fe2c55;"></i> ${video.likes}</div>
             </div>
         `;
         videoContainer.appendChild(videoCard);
     });
 
     /* =========================================
-       图片点击放大 (Lightbox) 交互逻辑
+       2. 高级自定义鼠标与交互动画
+       ========================================= */
+    const cursorDot = document.getElementById('cursor-dot');
+    const cursorOutline = document.getElementById('cursor-outline');
+    
+    // 鼠标移动跟随
+    window.addEventListener('mousemove', function(e) {
+        const posX = e.clientX;
+        const posY = e.clientY;
+        
+        cursorDot.style.left = `${posX}px`;
+        cursorDot.style.top = `${posY}px`;
+        
+        // 外圈加入极小的延迟，产生丝滑跟随感
+        cursorOutline.animate({
+            left: `${posX}px`,
+            top: `${posY}px`
+        }, { duration: 150, fill: "forwards" });
+    });
+
+    // 鼠标悬停到特定元素时触发磁性放大变色效果
+    const hoverTriggers = document.querySelectorAll('a, button, .hover-trigger, .project-gallery img');
+    hoverTriggers.forEach(trigger => {
+        trigger.addEventListener('mouseenter', () => document.body.classList.add('hover-target'));
+        trigger.addEventListener('mouseleave', () => document.body.classList.remove('hover-target'));
+    });
+
+    // 鼠标点击水波纹特效
+    document.addEventListener('click', function(e) {
+        let ripple = document.createElement('div');
+        ripple.className = 'click-ripple';
+        ripple.style.left = e.clientX + 'px';
+        ripple.style.top = e.clientY + 'px';
+        document.body.appendChild(ripple);
+        
+        // 动画播放完毕后移除DOM
+        setTimeout(() => { ripple.remove(); }, 600);
+    });
+
+    /* =========================================
+       3. Lightbox 图片点击放大逻辑
        ========================================= */
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const galleryImages = document.querySelectorAll('.project-gallery img');
 
-    // 为每张项目图片添加点击事件
     galleryImages.forEach(img => {
         img.addEventListener('click', () => {
-            lightboxImg.src = img.src; // 把点击的图片路径赋给大图
-            lightbox.classList.add('active'); // 显示模态框
+            lightboxImg.src = img.src;
+            lightbox.classList.add('active');
         });
     });
 
-    // 点击模态框任何地方即可关闭
     lightbox.addEventListener('click', () => {
         lightbox.classList.remove('active');
     });
