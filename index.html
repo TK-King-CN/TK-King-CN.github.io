@@ -161,14 +161,14 @@
         .timeline-card { padding: 30px; border-left: 4px solid var(--tk-cyan); margin-bottom: 20px; }
         .timeline-card:hover { transform: translateX(8px); background: #fff; box-shadow: var(--shadow-hover); }
 
-        /* === 注入你提供的 SVG 鼠标样式 === */
+        /* === 注入你提供的 SVG 鼠标样式 (已修复) === */
         #custom-svg-cursor {
             position: fixed;
             top: 0; left: 0;
             pointer-events: none; /* 穿透鼠标事件，不影响点击 */
             z-index: 99999;
             transform: translate(-10%, -10%); /* 微调热点位置 */
-            transition: transform 0.1s ease; /* 点击时的缩放动画 */
+            transition: transform 0.1s ease, opacity 0.15s ease; /* 新增 opacity 平滑过渡 */
             filter: drop-shadow(2px 6px 8px rgba(0, 0, 0, 0.25)); /* 立体阴影 */
         }
         /* SVG的颜色，默认为深黑色，鼠标按下时会产生特效 */
@@ -196,7 +196,7 @@
 </head>
 <body>
 
-<!-- === 这里是你提供的 SVG 鼠标 (我调整了尺寸 width/height="28") === -->
+<!-- === 这里是你提供的 SVG 鼠标 === -->
 <div id="custom-svg-cursor">
     <svg t="1777529737022" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1674" width="30" height="30">
         <path d="M250.752 208.448a32 32 0 0 0-41.216 41.216l207.36 550.4a32 32 0 0 0 60.8-2.624l55.936-198.528A96 96 0 0 1 600 532.48l198.528-55.936a32 32 0 0 0 2.56-60.8l-550.4-207.36z m-101.12 63.808c-29.12-77.248 46.4-152.832 123.712-123.712l550.336 207.36c86.72 32.704 81.408 157.12-7.808 182.272l-198.528 56a32 32 0 0 0-22.144 22.08l-55.936 198.528c-25.152 89.216-149.568 94.528-182.208 7.808l-207.424-550.4z" p-id="1675"></path>
@@ -258,7 +258,7 @@
                         <img src="./figures/蝴蝶刀账号数据5.png" alt="数据">
                         <img src="./figures/蝴蝶刀账号运营数据1.png" alt="数据">
                         <img src="./figures/蝴蝶刀账号运营数据2.png" alt="数据">
-                        <img src="./figures/蝴蝶刀账号运营数据3.png" alt="数据">
+                        <img src="./figures/蝴蝶刀运营数据3.png" alt="数据">
                     </div>
                 </div>
 
@@ -356,19 +356,32 @@
 
 <script>
     /* =========================================
-       1. SVG 自定义鼠标跟随逻辑
+       1. SVG 自定义鼠标跟随逻辑 (修复滚动条冲突版)
        ========================================= */
     const svgCursor = document.getElementById('custom-svg-cursor');
     
-    // 让自定义鼠标紧跟真实光标位置
+    // 让自定义鼠标紧跟真实光标位置，同时避让系统滚动条
     window.addEventListener('mousemove', function(e) {
-        svgCursor.style.left = e.clientX + 'px';
-        svgCursor.style.top = e.clientY + 'px';
+        // 判断鼠标是否进入了右侧的浏览器原生滚动条区域
+        const isOnScrollbar = e.clientX >= document.documentElement.clientWidth;
+
+        if (isOnScrollbar) {
+            // 进入滚动条区域：隐藏自定义鼠标，让给系统鼠标
+            svgCursor.style.opacity = '0';
+        } else {
+            // 在页面内容区：显示自定义鼠标并跟随
+            svgCursor.style.opacity = '1';
+            svgCursor.style.left = e.clientX + 'px';
+            svgCursor.style.top = e.clientY + 'px';
+        }
     });
 
     // 鼠标按下与松开的动效 (缩小 + 变红)
-    window.addEventListener('mousedown', () => {
-        document.body.classList.add('is-clicking');
+    window.addEventListener('mousedown', (e) => {
+        // 只有在非滚动条区域点击才触发动效
+        if (e.clientX < document.documentElement.clientWidth) {
+            document.body.classList.add('is-clicking');
+        }
     });
     window.addEventListener('mouseup', () => {
         document.body.classList.remove('is-clicking');
@@ -376,12 +389,11 @@
 
     // 当鼠标移出浏览器边界时隐藏
     document.addEventListener('mouseleave', () => {
-        svgCursor.style.display = 'none';
+        svgCursor.style.opacity = '0';
     });
     document.addEventListener('mouseenter', () => {
-        svgCursor.style.display = 'block';
+        svgCursor.style.opacity = '1';
     });
-
 
     /* =========================================
        2. 视频自动渲染模块
